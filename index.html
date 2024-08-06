@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Model Prediction</title>
+</head>
+<body>
+    <h1>Model Prediction</h1>
+    <form id="prediction-form">
+        <label for="features">Enter features (comma-separated):</label><br>
+        <input type="text" id="features" name="features"><br><br>
+        <input type="button" value="Predict" onclick="makePrediction()">
+    </form>
+    <p id="prediction-result"></p>
+
+    <script>
+        async function makePrediction() {
+            const features = document.getElementById('features').value.split(',').map(Number);
+            const response = await fetch('/api/predict', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ features: features }),
+            });
+            const data = await response.json();
+            document.getElementById('prediction-result').innerText = `Prediction: ${data.prediction}`;
+        }
+    </script>
+</body>
+</html>
