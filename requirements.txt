@@ -1,3 +1,2 @@
 joblib
 numpy
-scikit-learn  # Include this if your model depends on scikit-learn
