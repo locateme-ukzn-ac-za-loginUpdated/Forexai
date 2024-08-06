@@ -4,7 +4,7 @@ import joblib
 app = Flask(__name__)
 model = joblib.load('model.pkl')
 
-@app.route('/api/predict', methods=['POST'])
+@app.route('/predict', methods=['POST'])
 def predict():
     data = request.json
     prediction = model.predict([data['features']])
